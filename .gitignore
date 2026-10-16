@@ -1,0 +1,20 @@
+# Secrets (TECH_DECISIONS §6) — keys live in Windows Credential Manager, never in files
+*.env
+.env*
+secrets*
+config.local.*
+*.map.txt
+
+# Raw combat logs and mirrored copies (commit only anonymized *.anon.txt)
+WoWCombatLog*.txt
+spikes/results/**/mirror/
+
+# Python / tooling
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/

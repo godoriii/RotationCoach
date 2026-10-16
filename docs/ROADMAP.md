@@ -145,23 +145,25 @@ RotationCoach/
    └─ tools/                      # fake_wow_writer 등 테스트 도구
 ```
 
-## 5. 결정이 필요한 항목 (전체 목록)
+## 5. 결정 항목 (전체 목록)
 
-| ID | 결정 | 추천 / 기본안 | 근거 문서 | 언제까지 |
+> **2026-10-16 사용자가 전부 승인.** 아래 '추천 / 기본안'이 확정값이다. 측정·검토 후 정하기로 한 항목(D-5, D-7, D-9, D-12)은 그 절차 자체가 승인된 것이다.
+
+| ID | 결정 | 확정 내용 | 근거 문서 | 후속 |
 |---|---|---|---|---|
-| **D-0** | 제품 형태: "풀 종료 직후 채점"을 주 모드로 하는 방향 전환 승인 | 승인 | REQUIREMENTS §0, RISKS T-1·P-1 | 지금 |
-| **D-1** | 언어·오버레이: Python 3.12 + PySide6 | 승인 (S3로 최종 확인) | TECH_DECISIONS §1–2 | M0 끝 |
-| **D-2** | APL 처리: SimC APL 부분 인터프리터 + 스펙 어댑터(혼합안) | 승인 (S4로 최종 확인) | TECH_DECISIONS §3 | M0 끝 |
-| **D-3** | 전투 중 갱신 기능 | S1에서 전투 중 데이터가 안 오면 미구현. 오더라도 정책상 기본 꺼짐 | REQUIREMENTS FR-31, RISKS P-1 | M0 끝 |
-| **D-4** | 전투 중에 개별 실수 내용 표시 여부 | 표시 안 함 (개수만) | REQUIREMENTS C-3 | M4 전 |
-| **D-5** | 상세 해설 기본 모델 | Sonnet 5.5 (Opus 5.5는 선택) | TECH_DECISIONS §5 | S6 후 |
-| **D-6** | 전역 단축키 허용 | 사용 안 함 (트레이·제어판만) | REQUIREMENTS C-4, RISKS P-4 | M4 전 |
-| **D-7** | 빠른 요약에서 thinking 끄기 | S6 측정 후 | TECH_DECISIONS §5.1 | S6 후 |
-| **D-8** | 프롬프트 캐시 TTL | 5분으로 시작 | TECH_DECISIONS §5.2 | M5 |
-| **D-9** | WCL API 약관 원문 확인 (사용자가 브라우저로) | M6·S5 전 필수 | TECH_DECISIONS §4.4, RISKS P-5 | S5 전 |
-| **D-10** | 판정 허용 오차 초기값 R 300 ms · δ 150 ms · Q 400 ms | 승인 (S9로 조정) | SCORING_SPEC §1.2, §3 | M3 |
-| **D-11** | 이동 중 공백 처리 | IDLE (원거리 행동이 가능했을 때만) | SCORING_SPEC §3.3 | M3 |
-| **D-12** | 동률 그룹·경미 쌍 초기 목록 (생존 이론 관점 검토) | 사용자 검토 필요 | SCORING_SPEC §3.2, §4.2 | M3 |
-| **D-13** | MVP에서 2마리 이상 구간 제외 | 제외 | SCORING_SPEC §3.5 | M3 |
-| **D-14** | 스파이크 스크립트 작성 승인 범위 (S1·S7·S2 분석·S3·S4부터) | 승인 요청 | SPIKES §0 | 지금 |
-| **D-15** | API 키 저장: 자격 증명 관리자 + 앱 전용 작업공간·월 지출 한도 | 승인 | TECH_DECISIONS §6 | M5 전 |
+| **D-0** | 제품 형태: "풀 종료 직후 채점"을 주 모드로 하는 방향 전환 승인 | ✅ 승인 | REQUIREMENTS §0, RISKS T-1·P-1 | — |
+| **D-1** | 언어·오버레이: Python 3.12 + PySide6 | ✅ 승인 (S3로 최종 확인) | TECH_DECISIONS §1–2 | S3 |
+| **D-2** | APL 처리: SimC APL 부분 인터프리터 + 스펙 어댑터(혼합안) | ✅ 승인, **S4 성공으로 확정** | TECH_DECISIONS §3, [S4 결과](../spikes/results/S4.md) | — |
+| **D-3** | 전투 중 갱신 기능 | ✅ S1에서 전투 중 데이터가 안 오면 미구현. 오더라도 정책상 기본 꺼짐 | REQUIREMENTS FR-31, RISKS P-1 | S1 |
+| **D-4** | 전투 중에 개별 실수 내용 표시 여부 | ✅ 표시 안 함 (개수만) | REQUIREMENTS C-3 | — |
+| **D-5** | 상세 해설 기본 모델 | ✅ Sonnet 5.5 기본, Opus 5.5 선택 (S6 평가로 재확인) | TECH_DECISIONS §5 | S6 |
+| **D-6** | 전역 단축키 허용 | ✅ 사용 안 함 (트레이·제어판만) | REQUIREMENTS C-4, RISKS P-4 | — |
+| **D-7** | 빠른 요약에서 thinking 끄기 | ✅ S6 측정으로 결정 | TECH_DECISIONS §5.1 | S6 |
+| **D-8** | 프롬프트 캐시 TTL | ✅ 5분 | TECH_DECISIONS §5.2 | — |
+| **D-9** | WCL API 약관 원문 확인 (사용자가 브라우저로) | ✅ 사용자가 S5 전에 확인 | TECH_DECISIONS §4.4, RISKS P-5 | 🧑 S5 전 |
+| **D-10** | 판정 허용 오차 초기값 R 300 ms · δ 150 ms · Q 400 ms | ✅ 승인 (S9로 조정) | SCORING_SPEC §1.2, §3 | S9 |
+| **D-11** | 이동 중 공백 처리 | ✅ IDLE (원거리 행동이 가능했을 때만) | SCORING_SPEC §3.3 | — |
+| **D-12** | 동률 그룹·경미 쌍 초기 목록 (생존 이론 관점 검토) | ✅ 초기 목록 승인, S9 라벨 비교로 보정 | SCORING_SPEC §3.2, §4.2 | S9 |
+| **D-13** | MVP에서 2마리 이상 구간 제외 | ✅ 제외 | SCORING_SPEC §3.5 | — |
+| **D-14** | 스파이크 스크립트 작성 승인 범위 (S1·S7·S2 분석·S3·S4부터) | ✅ 승인 → 스크립트 작성 완료 ([spikes/README.md](../spikes/README.md)) | SPIKES §0 | — |
+| **D-15** | API 키 저장: 자격 증명 관리자 + 앱 전용 작업공간·월 지출 한도 | ✅ 승인 | TECH_DECISIONS §6 | 🧑 S6 전 작업공간·한도 설정 |

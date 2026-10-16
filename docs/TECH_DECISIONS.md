@@ -113,7 +113,7 @@ w.setAttribute(Qt.WA_ShowWithoutActivating)
 
 ### 3.3 혼합안 세부
 
-1. **파서**: SimC 조건식 문법(`& | ! = != < <= > >= + - * % %% <? >?`, 괄호)을 우선순위 기반 파서로 구현한다. 연산자 우선순위는 SimC 위키 기준 [확인 B-16]. `&`가 `|`보다 강하게 묶이는지는 위키 문구로 재확인 필요 [미확인].
+1. **파서**: SimC 조건식 문법(`& | ^ ! = != < <= > >= + - * % %% <? >? @ floor() ceil()`, 괄호)을 SimC와 같은 shunting-yard로 구현한다. 우선순위는 simc 소스 `precedence()`에서 확인했다 [확인 B-17]: `|`(1) < `^`(2) < `&`(3) < 비교(4) < `<?`(max)·`>?`(min)(5) < `+ -`(6) < `* %(나눗셈) %%(나머지)`(7) < 단항(8) < `floor/ceil`(9), 모두 좌결합. S4에서 한밤·TWW APL 전체를 오류 없이 파싱 ([S4 결과](../spikes/results/S4.md)).
 2. **목록 실행 의미**: `call_action_list`는 하위 목록에서 실행 가능한 행동이 없으면 다음 줄로 돌아온다. `run_action_list`는 돌아오지 않는다 (현재 APL은 미사용).
 3. **사용 가능성(`ready`)**: 쿨다운·충전, 집중 비용, 사거리(근접 5야드 계열), 시전 중 여부를 어댑터의 `spells.yaml`로 판정한다. 비용 값은 SimC 데이터 덤프를 기준으로 한다 (예: Raptor Strike 30, Wildfire Bomb 10) [확인 B-11].
 4. **채점 범위**: `cds` 목록 중 장신구·종족 특성·물약·외부 버프 줄은 GCD 판정에서 제외(`ignore_actions`)하고, Takedown 같은 주요 쿨기는 단일 대상 목록 쪽 판정과 별도 "쿨다운 효율" 지표로 다룬다. `retarget`, `auto_attack`, `snapshot_stats`, `summon_pet`도 제외한다.
@@ -193,7 +193,7 @@ query { worldData { expansions { id name zones { id name frozen encounters { id 
 ### 4.4 캐시와 이용 약관
 
 - WCL API 약관(RPG Logs API Terms)은 자동 요청이 403(Cloudflare)이라 원문을 직접 확인하지 못했다 **[미확인]**. 커뮤니티 요약에 따르면 상업적 이용은 승인 필요, 한도 우회 금지(여러 자격 증명으로 할당량 늘리기 포함), 스크래핑·영구 데이터베이스 구축 금지다 [2차 B-35].
-- **방침**: 요청은 사용자가 고른 리포트에 대해서만 한다. 캐시는 비교 작업용 단기 캐시(기본 14일, 설정 가능)로 두고 다른 플레이어 데이터를 모아 두는 기능은 만들지 않는다. **본 구현 전에 약관 원문을 브라우저로 직접 확인한다** ([결정 필요 D-9](#7-결정이-필요한-항목)).
+- **방침**: 요청은 사용자가 고른 리포트에 대해서만 한다. 캐시는 비교 작업용 단기 캐시(기본 14일, 설정 가능)로 두고 다른 플레이어 데이터를 모아 두는 기능은 만들지 않는다. **본 구현 전에 약관 원문을 브라우저로 직접 확인한다** ([결정 필요 D-9](#7-결정-항목-2026-10-16-전부-승인)).
 
 ---
 
@@ -298,15 +298,15 @@ query { worldData { expansions { id name zones { id name frozen encounters { id 
 
 ---
 
-## 7. 결정이 필요한 항목
+## 7. 결정 항목 (2026-10-16 전부 승인)
 
 | ID | 항목 | 추천 |
 |---|---|---|
-| D-1 | 언어·오버레이: Python + PySide6 | 추천안 승인 |
-| D-2 | APL 처리: 혼합안(C) | 추천안 승인 |
-| D-7 | 빠른 요약 thinking 끄기 여부 | S6 측정 후 결정 |
-| D-8 | 캐시 TTL 5분/1시간 | 5분으로 시작 |
-| D-9 | WCL API 약관 원문 확인 (사용자가 브라우저로) | M6 착수 전 필수 |
+| D-1 | 언어·오버레이: Python + PySide6 | ✅ 승인 (S3로 최종 확인) |
+| D-2 | APL 처리: 혼합안(C) | ✅ 승인, S4로 확정 |
+| D-7 | 빠른 요약 thinking 끄기 여부 | ✅ S6 측정으로 결정 |
+| D-8 | 캐시 TTL 5분/1시간 | ✅ 5분 |
+| D-9 | WCL API 약관 원문 확인 (사용자가 브라우저로) | ✅ S5 전에 사용자가 확인 |
 
 ---
 
@@ -411,6 +411,7 @@ query { worldData { expansions { id name zones { id name frozen encounters { id 
 - B-14 Hekili `thewarwithin` 브랜치 `TheWarWithin/HunterSurvival.lua`, `Scripts.lua`(SimToLua), `State.lua` — https://github.com/Hekili/hekili
 - B-15 hero-rotation-generator (Python APL 파서, 마지막 커밋 2020-05-02) — https://github.com/herotc/hero-rotation-generator
 - B-16 SimC 위키 "Action List Conditional Expressions" — https://github.com/simulationcraft/simc/wiki/Action-List-Conditional-Expressions
+- B-17 simc `engine/sim/expressions.cpp` (`lexer_t::next`, `precedence`, `convert_to_rpn`, midnight @ 76f8118c) — https://github.com/simulationcraft/simc/blob/midnight/engine/sim/expressions.cpp
 
 **오버레이**
 - B-20 qtbase `src/plugins/platforms/windows/qwindowswindow.cpp` (dev) — https://raw.githubusercontent.com/qt/qtbase/dev/src/plugins/platforms/windows/qwindowswindow.cpp · B-20b QtCentre 스레드(setWindowFlags 재생성) — https://www.qtcentre.org/threads/72127-(PyQt)-setWindowFlag-without-hiding-window
