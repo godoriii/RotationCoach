@@ -1,0 +1,7 @@
+## Interface: 120105, 120107
+## Title: Rotation Teacher Probe (M0)
+## Notes: M0 검증용. 전투 중 애드온이 실제로 읽을 수 있는 값을 기록해 SavedVariables로 남깁니다. 전투 중에는 아무것도 표시하지 않습니다.
+## Version: 0.1.0
+## SavedVariables: RotationTeacherProbeDB
+
+Probe.lua
