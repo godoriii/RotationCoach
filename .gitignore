@@ -1,13 +1,16 @@
-# Secrets (TECH_DECISIONS §6) — keys live in Windows Credential Manager, never in files
+# Secrets never live in the repo. WCL client values are stored DPAPI-encrypted
+# under %APPDATA%\RotationTeacher\ by tools/Save-WclCredential.ps1.
 *.env
 .env*
 secrets*
+wcl-client*.xml
+wcl-token*.xml
 config.local.*
-*.map.txt
 
-# Raw combat logs and mirrored copies (commit only anonymized *.anon.txt)
+# Raw combat logs and SavedVariables copies (may contain character names)
 WoWCombatLog*.txt
-spikes/results/**/mirror/
+*.SavedVariables.lua
+*.lua.bak
 
 # Python / tooling
 __pycache__/

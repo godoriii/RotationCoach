@@ -1,0 +1,4 @@
+# Windows PowerShell 5.1 reads BOM-less files in the system code page; keep the BOM and CRLF-agnostic text.
+*.ps1 text eol=crlf
+*.lua text eol=lf
+*.toc text eol=lf
